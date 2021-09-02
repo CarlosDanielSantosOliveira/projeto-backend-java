@@ -1,14 +1,21 @@
 package com.cursoangular.projetoangular.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
 public class Categoria implements Serializable {
 //Serializable é uma interface que diz que os objetos da classe possam ser gravados em bytes, isso serve para que
 //os objetos sejam salvos em arquivos, para trafegar redes e assim por diante.
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
 
