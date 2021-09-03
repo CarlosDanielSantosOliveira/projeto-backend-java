@@ -47,7 +47,6 @@ public class Categoria implements Serializable {
     //hashcode e equals. Na linguagem java, para que dois objetos possam ser comparados pelo seu conteudo,
     //e nao pelo ponteiro de memoria, eles precisam ser comaprados pelo hashcode equals
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -60,6 +59,5 @@ public class Categoria implements Serializable {
     public int hashCode() {
         return Objects.hash(id);
     }
-
 
 }
