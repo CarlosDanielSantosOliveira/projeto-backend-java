@@ -32,7 +32,7 @@ public class CategoriaResource {
         nesse a requisição tem como corpo o objeto que eu coloquei para ele me trazer
          */
     }
-
+    //Em vez de usar try catch, nos vamos usar um handler, que vai interceptar o erro e nos retornar o status 404 com o nome do erro que houve (Exceção que houve)
 
 
 }

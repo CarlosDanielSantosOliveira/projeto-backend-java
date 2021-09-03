@@ -1,5 +1,7 @@
 package com.cursoangular.projetoangular.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,6 +23,8 @@ public class Categoria implements Serializable {
     //Uma categoria tem varios produtos
     //Como eu fiz o mapeamento na classe produto, aqui vou precisar apenas referenciar o nome do atributo
     //que ficou responsavel pelo relacionamento na classe Produto, utilizando o mappedBy
+
+    @JsonManagedReference //Fazemos isso no lado que queremos que venha os objetos associados
     @ManyToMany(mappedBy = "categorias")
     private List<Produto> produtos = new ArrayList<>();
     //Usamos o ArrayList porque estamos falando que vamos ter uma coleção d eprodutos

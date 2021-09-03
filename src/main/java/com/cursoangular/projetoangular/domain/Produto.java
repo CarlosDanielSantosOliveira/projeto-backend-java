@@ -1,5 +1,7 @@
 package com.cursoangular.projetoangular.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ public class Produto implements Serializable {
 
     //Produto tem varias categorias
     //Por ser uma relação de muitos para muitos, nos ja temos a lista de cada lado da relação, entao agora nos vamos fazer assim:
+    @JsonBackReference //Do outro lado da associação ja foram buscados os objetos, entao agora vamos omitir a lista de categorias para cada produto
     @ManyToMany
     @JoinTable(name = "PRODUTO_CATEGORIA",
             joinColumns = @JoinColumn(name = "produto_id"),

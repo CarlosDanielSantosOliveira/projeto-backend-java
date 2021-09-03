@@ -2,9 +2,11 @@ package com.cursoangular.projetoangular.services;
 
 import com.cursoangular.projetoangular.domain.Categoria;
 import com.cursoangular.projetoangular.repositories.CategoriaRepository;
+import com.cursoangular.projetoangular.services.Exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.ObjectStreamException;
 import java.util.Optional;
 
 @Service
@@ -15,8 +17,10 @@ public class CategoriaService {
 
     public Categoria buscar(Integer id) {
         Optional<Categoria> obj = repo.findById(id); //Vai buscar o objeto pelo id dele, usamos o Optional porque estamos buscando uma coisa especifica no banco de dados
-        return obj.orElse(null);
+        return obj.orElseThrow(() -> new ObjectNotFoundException(
+                "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName())); //Essa categoria.class.getName é o nome da classe que esta com erro.
     }
+
     /*
     Optional: é uma classe que foi implementada no Java 8, que tem o
     objetivo de simplificar os códigos, facilitando a vida dos desenvolvedores.
