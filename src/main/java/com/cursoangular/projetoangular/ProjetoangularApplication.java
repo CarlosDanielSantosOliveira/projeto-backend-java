@@ -1,13 +1,8 @@
 package com.cursoangular.projetoangular;
 
-import com.cursoangular.projetoangular.domain.Categoria;
-import com.cursoangular.projetoangular.domain.Cidade;
-import com.cursoangular.projetoangular.domain.Estado;
-import com.cursoangular.projetoangular.domain.Produto;
-import com.cursoangular.projetoangular.repositories.CategoriaRepository;
-import com.cursoangular.projetoangular.repositories.CidadeRepository;
-import com.cursoangular.projetoangular.repositories.EstadoRepository;
-import com.cursoangular.projetoangular.repositories.ProdutoRepository;
+import com.cursoangular.projetoangular.domain.*;
+import com.cursoangular.projetoangular.domain.enums.TipoCliente;
+import com.cursoangular.projetoangular.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,6 +24,12 @@ public class ProjetoangularApplication implements CommandLineRunner {
 
 	@Autowired
 	private CidadeRepository cidadeRepository;
+
+	@Autowired
+	private ClienteRepository clienteRepository;
+
+	@Autowired
+	private EnderecoRespository enderecoRespository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetoangularApplication.class, args);
@@ -52,6 +53,15 @@ public class ProjetoangularApplication implements CommandLineRunner {
 		Cidade cid2 = new Cidade(null, "São Paulo", est2);
 		Cidade cid3 = new Cidade(null, "Campinas", est2);
 
+		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "12345678910", TipoCliente.PESSOAFISICA);
+
+		cli1.getTelefones().addAll(Arrays.asList("5655454695", "4646846846"));
+
+		Endereco e1 = new Endereco(null, "Rua Flores", "123", "Apto 303", "Jardim", "3938293", cli1, cid1 );
+		Endereco e2 = new Endereco(null, "Avenida Matos", "123", "Sala 30233", "Centro", "69383293", cli1, cid2 );
+
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+
 		//Agora nos temos que associar os produtos com as categorias
 		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
 		cat2.getProdutos().addAll(Arrays.asList(p2));
@@ -69,5 +79,7 @@ public class ProjetoangularApplication implements CommandLineRunner {
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(cid1, cid2, cid3));
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRespository.saveAll(Arrays.asList(e1, e2));
 	}
 }
