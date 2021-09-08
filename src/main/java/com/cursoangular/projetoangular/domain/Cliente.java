@@ -1,6 +1,7 @@
 package com.cursoangular.projetoangular.domain;
 
 import com.cursoangular.projetoangular.domain.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,6 +19,7 @@ public class Cliente implements Serializable {
     private String cpfOuCnpj;
     private Integer tipo; //No mundo interno do sistema o tipo sera integer e no externo sera do tipo TipoCliente
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "cliente") //Nome do atributo na tabela endereco que recebeu o mapeamento ManyToOne
     private List<Endereco> enderecos = new ArrayList<>();
 
